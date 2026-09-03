@@ -63,7 +63,7 @@ if args.resume:
     # Load checkpoint.
     print('==> Resuming from checkpoint..')
     assert os.path.exists(args.load_path), 'Error: no checkpoint found!'
-    checkpoint = torch.load(args.load_path)
+    checkpoint = torch.load(args.load_path,weights_only=False)
     net = checkpoint['net']
     acc = checkpoint['acc']
     start_epoch = checkpoint['epoch']
