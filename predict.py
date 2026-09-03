@@ -34,7 +34,7 @@ else:
 # Load checkpoint.
 print('==> Resuming from checkpoint..')
 assert os.path.exists(args.model_path), 'Error: no checkpoint found!'
-checkpoint = torch.load(args.model_path)
+checkpoint = torch.load(args.model_path,weights_only=True)
 net = checkpoint['net']
 acc = checkpoint['acc']
 start_epoch = checkpoint['epoch']
