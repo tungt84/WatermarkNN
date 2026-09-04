@@ -35,7 +35,8 @@ parser.add_argument('--log_dir', default='./log', help='the path the log dir')
 parser.add_argument('--runname', default='finetune', help='the exp name')
 parser.add_argument('--tunealllayers', action='store_true', help='fine-tune all layers')
 parser.add_argument('--reinitll', action='store_true', help='re initialize the last layer')
-
+parser.add_argument('--download', default=True, action='store_true', help='download the dataset')
+parser.add_argument('--weights_only', default=True, action='store_true', help='load weights only')
 args = parser.parse_args()
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -53,7 +54,7 @@ with open(confgfile, 'w') as f:
         f.write('{}: {}\n'.format(arg, getattr(args, arg)))
 
 trainloader, testloader, n_classes = getdataloader(
-    args.dataset, args.train_db_path, args.test_db_path, args.batch_size)
+    args.dataset, args.train_db_path, args.test_db_path, args.batch_size, download=args.download)
 
 # load watermark images
 print('Loading watermark images')
@@ -61,7 +62,7 @@ wmloader = getwmloader(args.wm_path, args.batch_size, args.wm_lbl)
 
 # Loading model.
 print('==> loading model...')
-checkpoint = torch.load(args.load_path,weights_only=False)
+checkpoint = torch.load(args.load_path, weights_only=args.weights_only)
 net = checkpoint['net']
 acc = checkpoint['acc']
 start_epoch = checkpoint['epoch']

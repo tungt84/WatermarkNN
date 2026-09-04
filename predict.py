@@ -17,7 +17,8 @@ parser.add_argument('--wm_path', default='./data/trigger_set/', help='the path t
 parser.add_argument('--wm_lbl', default='labels-cifar.txt', help='the path the wm random labels')
 parser.add_argument('--testwm', action='store_true', help='test the wm set or cifar10 dataset.')
 parser.add_argument('--db_path', default='./data', help='the path to the root folder of the test data')
-
+parser.add_argument('--download', default=True, action='store_true', help='download the dataset')
+parser.add_argument('--weights_only', default=True, action='store_true', help='load weights only')
 args = parser.parse_args()
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -28,13 +29,13 @@ if args.testwm:
     print('Loading watermark images')
     loader = getwmloader(args.wm_path, batch_size, args.wm_lbl)
 else:
-    _, loader, _ = getdataloader('cifar10', args.db_path, args.db_path, batch_size)
+    _, loader, _ = getdataloader('cifar10', args.db_path, args.db_path, batch_size, args.download)
 
 # Model
 # Load checkpoint.
 print('==> Resuming from checkpoint..')
 assert os.path.exists(args.model_path), 'Error: no checkpoint found!'
-checkpoint = torch.load(args.model_path,weights_only=False)
+checkpoint = torch.load(args.model_path, weights_only=args.weights_only)
 net = checkpoint['net']
 acc = checkpoint['acc']
 start_epoch = checkpoint['epoch']

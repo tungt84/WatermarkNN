@@ -33,6 +33,7 @@ parser.add_argument('--resume', '-r', action='store_true', help='resume from che
 parser.add_argument('--wmtrain', '-wmt', action='store_true', help='train with wms?')
 parser.add_argument('--log_dir', default='./log', help='the path the log dir')
 parser.add_argument('--runname', default='train', help='the exp name')
+parser.add_argument('--download', default=True, action='store_true', help='download the dataset')
 
 args = parser.parse_args()
 
@@ -51,7 +52,7 @@ with open(confgfile, 'w') as f:
         f.write('{}: {}\n'.format(arg, getattr(args, arg)))
 
 trainloader, testloader, n_classes = getdataloader(
-    args.dataset, args.train_db_path, args.test_db_path, args.batch_size)
+    args.dataset, args.train_db_path, args.test_db_path, args.batch_size, download=args.download)
 
 wmloader = None
 if args.wmtrain:

@@ -43,7 +43,7 @@ def _getdatatransformsdb(datatype):
     return transform_train, transform_test
 
 
-def getdataloader(datatype, train_db_path, test_db_path, batch_size):
+def getdataloader(datatype, train_db_path, test_db_path, batch_size,download=True):
     # get transformations
     transform_train, transform_test = _getdatatransformsdb(datatype=datatype)
     n_classes = 0
@@ -52,19 +52,19 @@ def getdataloader(datatype, train_db_path, test_db_path, batch_size):
     if datatype.lower() == CIFAR10:
         print("Using CIFAR10 dataset.")
         trainset = torchvision.datasets.CIFAR10(root=train_db_path,
-                                                train=True, download=True,
+                                                train=True, download=download,
                                                 transform=transform_train)
         testset = torchvision.datasets.CIFAR10(root=test_db_path,
-                                               train=False, download=True,
+                                               train=False, download=download,
                                                transform=transform_test)
         n_classes = 10
     elif datatype.lower() == CIFAR100:
         print("Using CIFAR100 dataset.")
         trainset = torchvision.datasets.CIFAR100(root=train_db_path,
-                                                 train=True, download=True,
+                                                 train=True, download=download,
                                                  transform=transform_train)
         testset = torchvision.datasets.CIFAR100(root=test_db_path,
-                                                train=False, download=True,
+                                                train=False, download=download,
                                                 transform=transform_test)
         n_classes = 100
     else:
