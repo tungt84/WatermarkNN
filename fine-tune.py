@@ -61,7 +61,7 @@ wmloader = getwmloader(args.wm_path, args.batch_size, args.wm_lbl)
 
 # Loading model.
 print('==> loading model...')
-checkpoint = torch.load(args.load_path,weights_only=True)
+checkpoint = torch.load(args.load_path,weights_only=False)
 net = checkpoint['net']
 acc = checkpoint['acc']
 start_epoch = checkpoint['epoch']
