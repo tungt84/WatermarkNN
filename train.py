@@ -33,8 +33,8 @@ parser.add_argument('--resume', '-r', action='store_true', help='resume from che
 parser.add_argument('--wmtrain', '-wmt', action='store_true', help='train with wms?')
 parser.add_argument('--log_dir', default='./log', help='the path the log dir')
 parser.add_argument('--runname', default='train', help='the exp name')
-parser.add_argument('--download', default=True, action='store_true', help='download the dataset')
-parser.add_argument('--weights_only', default=True, action='store_true', help='load weights only')
+parser.add_argument('--download',  action='store_true', help='download the dataset')
+parser.add_argument('--weights_only',  action='store_true', help='load weights only')
 
 args = parser.parse_args()
 

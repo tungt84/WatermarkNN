@@ -17,8 +17,8 @@ parser.add_argument('--wm_path', default='./data/trigger_set/', help='the path t
 parser.add_argument('--wm_lbl', default='labels-cifar.txt', help='the path the wm random labels')
 parser.add_argument('--testwm', action='store_true', help='test the wm set or cifar10 dataset.')
 parser.add_argument('--db_path', default='./data', help='the path to the root folder of the test data')
-parser.add_argument('--download', default=True, action='store_true', help='download the dataset')
-parser.add_argument('--weights_only', default=True, action='store_true', help='load weights only')
+parser.add_argument('--download', action='store_true', help='download the dataset')
+parser.add_argument('--weights_only', action='store_true', help='load weights only')
 args = parser.parse_args()
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'

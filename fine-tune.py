@@ -35,8 +35,8 @@ parser.add_argument('--log_dir', default='./log', help='the path the log dir')
 parser.add_argument('--runname', default='finetune', help='the exp name')
 parser.add_argument('--tunealllayers', action='store_true', help='fine-tune all layers')
 parser.add_argument('--reinitll', action='store_true', help='re initialize the last layer')
-parser.add_argument('--download', default=True, action='store_true', help='download the dataset')
-parser.add_argument('--weights_only', default=True, action='store_true', help='load weights only')
+parser.add_argument('--download',  action='store_true', help='download the dataset')
+parser.add_argument('--weights_only', action='store_true', help='load weights only')
 args = parser.parse_args()
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
